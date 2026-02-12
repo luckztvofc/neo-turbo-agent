@@ -1,0 +1,43 @@
+// Build file for neo-turbo-agent project
+
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 30
+    
+    defaultConfig {
+        applicationId "com.example.neoturboagent"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+        
+        signingConfigs {
+            release {
+                keyAlias = "your-key-alias"
+                keyPassword = "your-key-password"
+                storeFile = file("path/to/your/keystore.jks")
+                storePassword = "your-store-password"
+            }
+        }
+    
+        buildTypes {
+            release {
+                minifyEnabled true
+                proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+                signingConfig signingConfigs.release
+            }
+        }
+    }
+
+    dependencies {
+        implementation 'com.google.firebase:firebase-analytics:20.0.0'
+        implementation 'com.google.firebase:firebase-auth:21.0.1'
+        // Add other dependencies
+    }
+}
+
+// Add your ProGuard rules here
+// proguard-rules.pro
+-keep class com.example.neoturboagent.** { *; }
+-keep public class * extends com.google.firebase.**
